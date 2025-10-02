@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects - Sami</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --primary: #00c3ff;
+      --primary-dark: #008bb7;
+      --secondary: #ff4d8d;
+      --dark: #0a1b29;
+      --dark-light: #14263d;
+      --text: #ffffff;
+      --text-light: #a0b3c6;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--dark) 0%, #0f2a3f 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Header Styles */
+    .header {
+      background: rgba(17, 31, 51, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: var(--dark);
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 195, 255, 0.3);
+    }
+
+    .back-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 195, 255, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(rgba(10, 27, 41, 0.8), rgba(10, 27, 41, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%230a1b29" width="1200" height="800"/><g fill="%2314263d" opacity="0.5"><circle cx="200" cy="100" r="40"/><circle cx="800" cy="200" r="60"/><circle cx="1000" cy="500" r="50"/><circle cx="300" cy="600" r="70"/><circle cx="600" cy="400" r="30"/></g></svg>');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2rem;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* Projects Grid */
+    .projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .section-title p {
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--dark-light);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-image {
+      height: 220px;
+      width: 100%;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.1);
+    }
+
+    .project-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--secondary);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .project-tag {
+      background: rgba(0, 195, 255, 0.2);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+    .project-description {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .project-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-features li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .project-features li i {
+      color: var(--primary);
+      font-size: 0.8rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-link {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .project-link.primary {
+      background: var(--primary);
+      color: var(--dark);
+    }
+
+    .project-link.primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .project-link.secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .project-link.secondary:hover {
+      background: rgba(0, 195, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(17, 31, 51, 0.9);
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-col h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-col p {
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--dark-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      color: var(--dark);
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .stats {
+        gap: 2rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-links {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 1rem;
+      }
+
+      .hero {
+        padding: 2rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .projects-container {
+        padding: 2rem 1rem;
+      }
+
+      .stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <span>My Project</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#projects">Projects</a>
+        
+      </nav>
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>My Creative Projects</h1>
+    <p>Explore my portfolio of innovative applications and solutions built with modern technologies</p>
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">Projects Completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Published Apps</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">90%</span>
+        <span class="stat-label">Client Satisfaction</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects-container" id="projects">
+    <div class="section-title">
+      <h2>Featured Projects</h2>
+      <p>Discover my latest work in mobile app development and innovative solutions</p>
+    </div>
+
+    <div class="projects-grid">
+      
+      <!-- Red Hope Project -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="redhope.jpg" alt="Red Hope Project">
+          <div class="project-badge">Featured</div>
+        </div>
+        <div class="project-content">
+          <h3>Red Hope</h3>
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Firebase</span>
+            <span class="project-tag">XML</span>
+            <span class="project-tag">Maps</span>
+          </div>
+          <p class="project-description">
+            A user-friendly blood donor search system based on location with real-time tracking and emergency alerts.
+          </p>
+          <ul class="project-features">
+            <li><i class="fas fa-check"></i> Location-based donor search</li>
+            <li><i class="fas fa-check"></i> Real-time availability tracking</li>
+            <li><i class="fas fa-check"></i> Emergency contact system</li>
+            <li><i class="fas fa-check"></i> Secure Firebase authentication</li>
+          </ul>
+          <div class="project-links">
+            <a href="redhope.html" class="project-link primary">
+              <i class="fas fa-external-link-alt"></i> View Details
+            </a>
+            <a href="#" class="project-link secondary">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learnix Project -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="lb.png" alt="Learnix Project">
+          <div class="project-badge">Education</div>
+        </div>
+        <div class="project-content">
+          <h3>Learnix</h3>
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Firebase</span>
+            <span class="project-tag">SQLite</span>
+            <span class="project-tag">Education</span>
+          </div>
+          <p class="project-description">
+            An e-learning app covering computer theory, daily quizzes, and comprehensive term dictionary for students.
+          </p>
+          <ul class="project-features">
+            <li><i class="fas fa-check"></i> Daily quiz with streak tracking</li>
+            <li><i class="fas fa-check"></i> 100+ computer terms dictionary</li>
+            <li><i class="fas fa-check"></i> Offline access with SQLite</li>
+            <li><i class="fas fa-check"></i> Learning progress analytics</li>
+          </ul>
+          <div class="project-links">
+            <a href="learnix.html" class="project-link primary">
+              <i class="fas fa-external-link-alt"></i> View Details
+            </a>
+            <a href="#" class="project-link secondary">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task Manager Pro -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1074&q=80" alt="Task Manager">
+          <div class="project-badge">Productivity</div>
+        </div>
+        <div class="project-content">
+          <h3>Task Manager Pro</h3>
+          <div class="project-tags">
+            <span class="project-tag">Kotlin</span>
+            <span class="project-tag">Room DB</span>
+            <span class="project-tag">Material Design</span>
+          </div>
+          <p class="project-description">
+            Advanced task management application with team collaboration features and progress tracking.
+          </p>
+          <ul class="project-features">
+            <li><i class="fas fa-check"></i> Team collaboration tools</li>
+            <li><i class="fas fa-check"></i> Progress tracking & analytics</li>
+            <li><i class="fas fa-check"></i> Priority-based task sorting</li>
+            <li><i class="fas fa-check"></i> Deadline reminders</li>
+          </ul>
+          <div class="project-links">
+            <a href="project-details-taskmanager.html" class="project-link primary">
+              <i class="fas fa-external-link-alt"></i> View Details
+            </a>
+            <a href="#" class="project-link secondary">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>SamiDev</h3>
+        <p>Passionate mobile app developer creating innovative solutions that make a difference in people's lives.</p>
+        <div class="social-links">
+         <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/thesami"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/thesami404" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/thesami404/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/sami.of.dreams"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Skills</h3>
+        <ul class="footer-links">
+          <li><a href="#">Android Development</a></li>
+          <li><a href="#">Java & Kotlin</a></li>
+          <li><a href="#">Firebase</a></li>
+          <li><a href="#">UI/UX Design</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 Sami | App Developer | All Rights Reserved</p>
+    </div>
+  </footer>
+
+</body>
+</html>
